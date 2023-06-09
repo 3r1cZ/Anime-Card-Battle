@@ -1,4 +1,4 @@
-# Anime Card Battle
+# Anime Card Battle - AniFight
 
 This project is a game developed with Unity in C# for PC. It features knock-off anime characters and gameplay similar to other card games such as Pokemon and Yu-Gi-Oh.
 
