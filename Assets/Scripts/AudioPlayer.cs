@@ -25,7 +25,7 @@ public class AudioPlayer : MonoBehaviour
         
     }
     // sound for button clicked
-    public void Button1() { 
+    public void ButtonMakeSound() { 
         src.clip = buttonEffect;
         src.Play();
     }
