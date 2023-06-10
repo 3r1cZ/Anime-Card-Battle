@@ -422,8 +422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f00e9a4656ef94a4eb64fbc722400c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  src: {fileID: 471698253}
+  sfx: {fileID: 471698253}
+  backgroundMusic: {fileID: 0}
   buttonEffect: {fileID: 8300000, guid: df1bd33529cabd54fbe24c748aa18baa, type: 3}
+  background: {fileID: 0}
 --- !u!1 &471698252
 GameObject:
   m_ObjectHideFlags: 0

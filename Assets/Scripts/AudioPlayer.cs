@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    public AudioSource src;
+    public AudioSource sfx;
+    public AudioSource backgroundMusic;
     public AudioClip buttonEffect;
+    public AudioClip background;
     // Start is called before the first frame update
-    /*void Start()
+    void Start()
     {
+        if (backgroundMusic != null) {
+            backgroundMusic.clip = background;
+
+            backgroundMusic.Play();
+        }
+  
         
     }
 
@@ -16,17 +24,23 @@ public class AudioPlayer : MonoBehaviour
     void Update()
     {
         
-    }*/
+    }
 
 
     private void Awake()
     {
-        DontDestroyOnLoad(src);
+        if (sfx != null)
+        {
+            DontDestroyOnLoad(sfx);
+        }
+        if (backgroundMusic != null) {
+            DontDestroyOnLoad(backgroundMusic);
+        }
         
     }
     // sound for button clicked
     public void ButtonMakeSound() { 
-        src.clip = buttonEffect;
-        src.Play();
+        sfx.clip = buttonEffect;
+        sfx.Play();
     }
 }
