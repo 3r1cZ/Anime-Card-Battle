@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 466509749}
   - component: {fileID: 466509748}
   - component: {fileID: 466509747}
+  - component: {fileID: 466509751}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -372,6 +373,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &466509751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466509746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a32563720e0ec34e95a5869519c419e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &541653683
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,7 +937,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1325018850}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466509751}
+        m_TargetAssemblyTypeName: SceneSwitch, Assembly-CSharp
+        m_MethodName: switchToRules
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1325018850
 MonoBehaviour:
   m_ObjectHideFlags: 0
