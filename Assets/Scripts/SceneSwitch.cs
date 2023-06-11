@@ -35,4 +35,9 @@ public class SceneSwitch : MonoBehaviour
     public void rulesToLobby() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
+
+    // switches scene from Lobby to MainMenu
+    public void lobbyToMainMenu() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 3);
+    }
 }
