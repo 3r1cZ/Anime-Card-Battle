@@ -1492,10 +1492,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 30221373}
   m_HandleRect: {fileID: 1103352449}
   m_Direction: 0
-  m_MinValue: -50
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1524,6 +1524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 24100000, guid: 957d3f03190db9347934ba2ce4e0f047, type: 2}
+  musicSlider: {fileID: 1342734884}
 --- !u!1 &1385658112
 GameObject:
   m_ObjectHideFlags: 0
