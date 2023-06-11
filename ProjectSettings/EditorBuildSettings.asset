@@ -5,19 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BackgroundMusic.unity
     guid: 5ad49781a79068a408c80debc286d0ee
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 03e2eec122dd9084ca27fed3e0c83ad5
   - enabled: 1
-    path: Assets/Scenes/Rules.unity
-    guid: b6471b1f2b6e1284aa4757de86b03fa6
-  - enabled: 1
-    path: Assets/Scenes/Settings.unity
-    guid: 9ee6567468fc6a64c935dd48a09ae534
-  - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: 38ec72cd29e64d24297a52e16674c0af
+    path: Assets/Scenes/GameScreen.unity
+    guid: 2765df915c97f80409694d7d8ce9411d
   m_configObjects: {}
