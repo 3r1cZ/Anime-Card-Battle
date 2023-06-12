@@ -33,9 +33,6 @@ public class AudioPlayer : MonoBehaviour
         {
             DontDestroyOnLoad(sfx);
         }
-        if (backgroundMusic != null) {
-            DontDestroyOnLoad(backgroundMusic);
-        }
         
     }
     // sound for button clicked
