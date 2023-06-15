@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestLobby : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class TestLobby : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
     }
 
     private void Update()
@@ -48,11 +51,15 @@ public class TestLobby : MonoBehaviour
         {
             string lobbyName = "MyLobby";
             int maxPlayers = 2;
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers);
+            CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
+            {
+                IsPrivate = true,
+            };
+            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions);
 
             hostLobby = lobby;
 
-            Debug.Log("Created Lobby " + lobby.Name + " " + lobby.MaxPlayers);
+            Debug.Log("Created Lobby " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
         }
         catch(LobbyServiceException e) {
             Debug.Log(e);
@@ -84,6 +91,18 @@ public class TestLobby : MonoBehaviour
             }
         }
         catch (LobbyServiceException e) {
+            Debug.Log(e);
+        }
+    }
+
+    public async void JoinLobbyByCode(TMP_InputField lobbyCode) {
+        try {
+            string code = lobbyCode.text.ToString();
+            await Lobbies.Instance.JoinLobbyByCodeAsync(code);
+            Debug.Log("Joined lobby with code " + code);
+        }
+        catch (LobbyServiceException e)
+        {
             Debug.Log(e);
         }
     }
