@@ -95,11 +95,25 @@ public class TestLobby : MonoBehaviour
         }
     }
 
+    // joins a lobby from user code input
     public async void JoinLobbyByCode(TMP_InputField lobbyCode) {
         try {
             string code = lobbyCode.text.ToString();
             await Lobbies.Instance.JoinLobbyByCodeAsync(code);
             Debug.Log("Joined lobby with code " + code);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
+    // joins a random lobby immediately
+    public async void QuickJoinLobby() {
+        try
+        {
+            await LobbyService.Instance.QuickJoinLobbyAsync();
+            Debug.Log("Joined a lobby!");
         }
         catch (LobbyServiceException e)
         {
