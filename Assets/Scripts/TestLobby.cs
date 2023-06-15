@@ -46,7 +46,7 @@ public class TestLobby : MonoBehaviour
     }
 
     // creates a lobby
-    public async void CreateLobby() {
+    public async void CreateLobby(TMP_Text code) {
         try
         {
             string lobbyName = "MyLobby";
@@ -59,11 +59,18 @@ public class TestLobby : MonoBehaviour
 
             hostLobby = lobby;
 
+            DisplayCode(code);
+
             Debug.Log("Created Lobby " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
+
         }
         catch(LobbyServiceException e) {
             Debug.Log(e);
         }  
+    }
+
+    private void DisplayCode(TMP_Text code) {
+        code.text = hostLobby.LobbyCode;
     }
 
     // lists out current active lobbies
