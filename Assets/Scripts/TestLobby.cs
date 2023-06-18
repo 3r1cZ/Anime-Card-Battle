@@ -13,6 +13,8 @@ public class TestLobby : MonoBehaviour
 
     private Lobby hostLobby;
     private float heartbeatTimer;
+    public TMP_Text player;
+    private string playerName;
     private async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -25,13 +27,17 @@ public class TestLobby : MonoBehaviour
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
+        Debug.Log(playerName);
+
     }
 
     private void Update()
     {
         HandleLobbyHeartbeat();
+        playerName = player.text;
     }
 
+ 
     //pings the lobby to ensure it does not go inactive
     private async void HandleLobbyHeartbeat() {
         if (hostLobby != null) {
@@ -53,7 +59,8 @@ public class TestLobby : MonoBehaviour
             int maxPlayers = 2;
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
-                IsPrivate = true,
+                IsPrivate = false,
+                Player = GetPlayer()
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions);
 
@@ -63,6 +70,7 @@ public class TestLobby : MonoBehaviour
 
             Debug.Log("Created Lobby " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
 
+            PrintPlayers(hostLobby);
         }
         catch(LobbyServiceException e) {
             Debug.Log(e);
@@ -105,9 +113,15 @@ public class TestLobby : MonoBehaviour
     // joins a lobby from user code input
     public async void JoinLobbyByCode(TMP_InputField lobbyCode) {
         try {
+            JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions
+            {
+                Player = GetPlayer()
+            };
             string code = lobbyCode.text.ToString();
-            await Lobbies.Instance.JoinLobbyByCodeAsync(code);
+            Lobby joinedLobby = await Lobbies.Instance.JoinLobbyByCodeAsync(code, joinLobbyByCodeOptions);
             Debug.Log("Joined lobby with code " + code);
+
+            PrintPlayers(joinedLobby);
         }
         catch (LobbyServiceException e)
         {
@@ -126,5 +140,21 @@ public class TestLobby : MonoBehaviour
         {
             Debug.Log(e);
         }
+    }
+
+    private void PrintPlayers(Lobby lobby) {
+        Debug.Log("Players in Lobby " + lobby.Name);
+        foreach (Player player in lobby.Players) {
+            Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
+        }
+    }
+
+    private Player GetPlayer() {
+        return new Player
+        {
+            Data = new Dictionary<string, PlayerDataObject> {
+                        { "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                    }
+        };
     }
 }
