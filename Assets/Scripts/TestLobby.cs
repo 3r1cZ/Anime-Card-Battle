@@ -60,7 +60,10 @@ public class TestLobby : MonoBehaviour
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
                 IsPrivate = false,
-                Player = GetPlayer()
+                Player = GetPlayer(),
+                Data = new Dictionary<string, DataObject> {
+                    { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, "Normal", DataObject.IndexOptions.S1)}
+                }
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions);
 
@@ -89,7 +92,8 @@ public class TestLobby : MonoBehaviour
             {
                 Count = 25, // get 25 results
                 Filters = new List<QueryFilter> {
-                    new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT) // at least 1 available slot
+                    new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT), // at least 1 available slot
+                    new QueryFilter(QueryFilter.FieldOptions.S1, "Normal", QueryFilter.OpOptions.EQ) // filter by normal gamemode
                 },
                 //order by time created
                 Order = new List<QueryOrder> {
@@ -102,7 +106,7 @@ public class TestLobby : MonoBehaviour
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
             foreach (Lobby lobby in queryResponse.Results)
             {
-                Debug.Log(lobby.Name + " " + lobby.MaxPlayers);
+                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["GameMode"].Value);
             }
         }
         catch (LobbyServiceException e) {
@@ -143,7 +147,7 @@ public class TestLobby : MonoBehaviour
     }
 
     private void PrintPlayers(Lobby lobby) {
-        Debug.Log("Players in Lobby " + lobby.Name);
+        Debug.Log("Players in Lobby " + lobby.Name + " " + lobby.Data["GameMode"].Value);
         foreach (Player player in lobby.Players) {
             Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
         }
