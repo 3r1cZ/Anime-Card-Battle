@@ -5,6 +5,7 @@ This project is a game developed with Unity in C# for PC. It features knock-off 
 ## Things Learned
 * How to code in C#
 * How to use Unity to develop a 2D card game
+* Unity Lobby Service for multiplayer matchmaking
 * How to plan a project, including features and scheduling. 
 
 ## Gameplay
